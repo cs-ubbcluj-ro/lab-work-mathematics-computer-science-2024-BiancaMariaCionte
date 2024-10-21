@@ -1,0 +1,67 @@
+// find the first k prime numbers and print them
+VAR
+	n : INT;
+	k : INT;
+	count : INT;
+	i : INT;
+	is_prime : BOOL;
+
+BEGIN
+	READ(k);
+	count := 0;
+	n := 2;
+
+	WHILE count < k DO
+	BEGIN
+		is_prime := TRUE;
+		i := 2;
+		
+		WHILE i*i <= n AND is_prime DO
+		BEGIN
+			IF n MOD i = 0 THEN
+				is_prime := FALSE;
+			i := i + 1;
+		END;
+		
+		IF is_prime THEN
+		BEGIN
+			WRITE(n);
+			count := count + 1;
+		END;
+
+		n := n + 1;
+	END;
+END.
+
+
+VAR
+    song1 : Song;
+
+STRUCT Song {
+    artist : string;
+    duration : INT;
+}
+
+BEGIN
+    // Read values for the first song
+    WRITE("Enter artist for song 1:");
+    READ(song1.artist);
+    WRITE("Enter duration for song 1 (in seconds):");
+    READ(song1.duration);
+
+ // Output the details of the first song
+    WRITE("Song 1: Artist - ");
+    WRITE(song1.artist);
+    WRITE(", Duration - ");
+    WRITE(song1.duration);
+    WRITE(" seconds");
+END.
+
+
+
+
+
+
+
+
+

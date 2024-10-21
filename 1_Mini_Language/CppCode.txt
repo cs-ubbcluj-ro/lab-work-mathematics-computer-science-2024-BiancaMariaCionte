@@ -1,0 +1,31 @@
+int main()
+{
+	int n, k, count, i; 
+	bool is_prime;
+	
+	cout<<"Enter the value of k: ";
+	cin>>k;
+
+	count = 0;
+	n = 2; // we start looking for prime no. from 2
+
+	while(count<k){
+		is_prime = true;
+		i=2;
+
+		while(i*i<=n && is_prime){ // we check all the divisors of n
+			if(n%i == 0){
+				is_prime = false;
+			}
+			i++;			
+		}
+
+		if(is_prime){
+			cout<<n<<" ";
+			count++;
+		}	
+		n++; // we check for the next number
+	}
+	return 0;
+
+}

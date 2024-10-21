@@ -1,0 +1,53 @@
+Mini-Language Documentation
+
+1. Reserved Words
+1.1 VAR: Declares the start of a variable section in the program.
+1.2 BEGIN: Marks the beginning of a block of statements.
+1.3 END: Marks the end of a block of statements.
+1.4 READ: A function to read input from the user.
+1.5 WRITE: A function to display output.
+1.6 IF, THE: Conditional control structures for decision making.
+1.7 WHILE, DO: Looping constructs for repeating statements.
+1.8 TRUE, FALSE: Boolean constants representing truth values.
+1.9 INT, BOOL: Basic data types (integer and boolean).
+
+2. Operators
+2.1 Arithmetic Operators:
+- "+" : Adds two numbers.
+- "MOD" : Modulus operator used to check for divisibility in prime number logic. Returns the residue of the division operation
+- "/" : Divides one number by another.
+
+2.2 Assignment Operator:
+- ":=" : Used to assign a value to a variable in the mini-language (translated to "=" in C++).
+
+2.3 Relational Operators:
+- "<" : Used to compare two values in conditions. Checks if the first term is less than the second term.
+- "<=" :  Used to compare two values in conditions. Checks if the first term is less than or equal to the second term.
+- "=" : Used for checking equality in conditions.
+
+2.4 Logical Operators:
+AND: Used in the inner while loop for checking conditions. The while loop proceedes if both conditions are satisfied i.e. the first one is true AND then it checks if the second one is true
+
+
+3. Identifiers
+In this program, identifiers like n, k, count, is_prime, I are used to refer to variables of type INT or BOOL.
+
+4. Constants
+4.1 Integer Constants: Numeric values such as "2", "3", "k" (input from the user), and the results of calculations used to check primality.
+4.2 Boolean Constants: Logical values "TRUE" and "FALSE", used for the is_prime flag.
+
+5. Program Explanation
+This program is designed to find and display the first k prime numbers, where k is provided by the user.
+
+    Input: The program reads an integer k from the user, representing the number of prime numbers to find.
+
+    Prime Number Calculation:
+        The outer while loop runs until k prime numbers are found.
+        For each number n, the program assumes it is prime by setting is_prime to TRUE.
+        The inner while loop checks whether n is divisible by any smaller numbers (i from 2 to sqrt(n))(if a number n is divisible by some integer greater than its square root, then it must also be divisible by a smaller number.).
+	If n is divisible by any i (using the MOD operator), is_prime is set to FALSE, indicating that n is not prime.
+        If is_prime remains TRUE, the number n is printed as a prime, and the count of prime numbers found is incremented.
+        The program continues checking the next number until it finds k primes.
+
+
+The second program reads the artist and the duration of a song and outputs the data.
