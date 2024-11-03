@@ -127,7 +127,7 @@ int main(int argc, char** argv) {
             perror("Could not open file");
             return 1;
         }
-        yyin = file; // Make sure to include this line to declare yyin.
+        yyin = file;
     }
 
     yylex();
