@@ -51,7 +51,7 @@ class FiniteAutomaton:
                 return False
             next_state = self.transitions[current_state][char]
             print(f"Transitioning from {current_state} with {char} to {next_state}")
-            current_state = next_state  # Fixed typo from 'curent_state'
+            current_state = next_state  #'curent_state'
         return current_state in self.final_states
 
 # Main Program
