@@ -1,0 +1,42 @@
+
+<program> ::= "VAR" <declaration> ";" <cmpdstmt> "."
+
+<declaration> ::= <identifier> ":" <type>
+<type> ::= "BOOL" | "INT"
+
+<cmpdstmt> ::= "BEGIN" <stmtlist> "END"
+<stmtlist> ::= <stmt> | <stmt> ";" <stmtlist>
+<stmt> ::= <simplstmt> | <structstmt>
+
+<simplstmt> ::= <assignstmt> | <iostmt>
+<assignstmt> ::= <identifier> ":=" <expression>
+<iostmt> ::= "READ" "(" <identifier> ")" | "WRITE" "(" <expression> ")"
+
+<expression> ::= <expression> "+" <term> | <term>
+<term> ::= <term> "*" <factor> | <factor>
+<factor> ::= "(" <expression> ")" | <identifier> | <intconst> | <boolconst> | <factor> "MOD" <factor>
+
+<condition> ::= <expression> <relation> <expression> | <expression> "AND" <expression>
+<relation> ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
+
+<structstmt> ::= <ifstmt> | <whilestmt> | <cmpdstmt>
+<ifstmt> ::= "IF" <condition> "THEN" <stmt> | "IF" <condition> "THEN" <stmt> "ELSE" <stmt>
+<whilestmt> ::= "WHILE" <condition> "DO" <stmt>
+
+<structdecl> ::= "STRUCT" <identifier> "{" <fieldlist> "}"
+<fieldlist> ::= <field> | <field> ";" <fieldlist>
+<field> ::= <identifier> ":" <type>
+<accessfield> ::= <identifier> "." <identifier>
+
+<identifier> ::= <letter> | <letter> <letter_digit_sequence>
+<letter_digit_sequence> ::= <letter> | <digit> | <letter_digit_sequence> <letter> | <letter_digit_sequence> <digit>
+<letter> ::= "a" | "b" | ... | "z"
+<digit> ::= "0" | "1" | ... | "9"
+
+<intconst> ::= "+" <no> | "-" <no> | <no>
+<no> ::= <digit> | <digit> <no>
+<boolconst> ::= "TRUE" | "FALSE"
+
+<constchar> ::= "string"
+<string> ::= <char> | <char> <string>
+<char> ::= <letter> | <digit>
