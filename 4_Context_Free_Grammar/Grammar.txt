@@ -24,33 +24,35 @@ Imposed conditions:
 - they cannot be reserved words such as: "INT", "IF","TRUE", "READ";
 - the rule is:
 
-    identifier ::= letter identifier_more
-    identifier_more ::= ε | identifier_element	
-    identifier_element ::= letter | digit
-    letter ::= "A" | "B" | . ..| "Z" | 'a' | 'b' | ... | 'z' 
-    digit ::= "0" | "1" |...| "9"
+// IDENTIFIER
+   identifier ::= letter | letter letter_digit_sequence
+   letter_digit_sequence ::= letter | digit | letter_digit_sequence letter | letter_digit_sequence digit | ε
 
 c) Constants
 Imposed conditions:
 - it is defined using basic values of the type: INT, BOOL
 - it cannot be modified after a value is assigned to it
 
-1. Constants
-
+// CONSTANTS - INT
 intconst ::= "+" int_nonzero | "-" int_nonzero | integer
 integer ::= '0' | integer_nonzero
 integer_nonzero ::= digit_nonzero integer_end
 integer_end ::= ε | digit integer_end
 digit_nonzero ::= '1' | '2' | ... | '9'
 
-2. String :
+
+
+//STRING
 string ::= '"' string_content '"'
-string_content ::= eps | char string_content
+string_content ::= ε | char string_content
 char ::= letter | digit
 
+// BOOLEAN
 3. BOOL - (for values of the type "TRUE" or "FALSE") rule:
     boolconst ::= "TRUE" | "FALSE" 
 
+
+// PROGRAM
 program ::= "VAR" declaration ";" cmpdstmt "."
 
 declaration ::= identifier ":" <type>
@@ -70,8 +72,8 @@ expression ::= expression "+" term | term
 term ::= term "*" factor | factor
 factor ::= "(" expression ")" | identifier | intconst | boolconst | factor "MOD" factor
 
-<condition> ::= expression relation expression | expression "AND" expression
-<relation> ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
+condition ::= expression relation expression | expression "AND" expression
+relation ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
 
 structstmt ::= ifstmt | whilestmt | cmpdstmt
 ifstmt ::= "IF" condition "THEN" stmt | "IF" condition "THEN" stmt "ELSE" stmt
@@ -82,14 +84,7 @@ fieldlist ::= field | field ";" fieldlist | ε
 field ::= identifier ":" type
 accessfield ::= identifier "." identifier
 
-identifier> ::= letter | letter letter_digit_sequence
-letter_digit_sequence ::= letter | digit | letter_digit_sequence letter | letter_digit_sequence digit | ε
 
 
 
 
-boolconst ::= "TRUE" | "FALSE"
-
-<constchar> ::= "string"
-<string> ::= <char> | <char> <string>
-<char> ::= <letter> | <digit>
