@@ -102,6 +102,8 @@ expression -> expression "+" term | term
 term -> term "*" factor | factor
 factor -> "(" expression ")" | identifier | intconst | boolconst | factor "MOD" factor
 
+
+// CONDITIONAL STATEMENT
 condition -> expression relation expression | expression "AND" expression
 relation -> "<" | "<=" | "=" | "<>" | ">=" | ">"
 
