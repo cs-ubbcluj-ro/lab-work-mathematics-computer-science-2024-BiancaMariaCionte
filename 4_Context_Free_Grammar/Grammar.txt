@@ -16,7 +16,7 @@ Operators:
 "+", "*", ":=", "<", "<=", "=", "AND", "MOD".
 
 Separators:
-"(", ")", "{", "}", "[", "]", ",", ";", ":", ".", space.
+"|", "\t", "\n"
  
 b) Identifiers
 Imposed conditions:
