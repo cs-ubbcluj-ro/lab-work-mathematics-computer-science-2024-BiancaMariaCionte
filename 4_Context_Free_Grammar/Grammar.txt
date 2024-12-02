@@ -35,7 +35,7 @@ The set of non-terminals includes:
 
 program <- start symbol
 . <- end symbol
-ε <- empty 
+ε <- empty sequence
 
 1. Alphabet:
 
