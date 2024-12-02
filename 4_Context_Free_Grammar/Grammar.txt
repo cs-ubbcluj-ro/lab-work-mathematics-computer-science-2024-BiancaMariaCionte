@@ -1,3 +1,4 @@
+ε <- empty
 1. Alphabet:
 
 1.1 lowercase letters (a-z) of the English alphabet
@@ -52,7 +53,7 @@ Imposed conditions:
 <type> ::= "BOOL" | "INT"
 
 <cmpdstmt> ::= "BEGIN" <stmtlist> "END"
-<stmtlist> ::= <stmt> | <stmt> ";" <stmtlist>
+<stmtlist> ::= <stmt> | <stmt> ";" <stmtlist> | ε
 <stmt> ::= <simplstmt> | <structstmt>
 
 <simplstmt> ::= <assignstmt> | <iostmt>
@@ -71,12 +72,12 @@ Imposed conditions:
 <whilestmt> ::= "WHILE" <condition> "DO" <stmt>
 
 <structdecl> ::= "STRUCT" <identifier> "{" <fieldlist> "}"
-<fieldlist> ::= <field> | <field> ";" <fieldlist>
+<fieldlist> ::= <field> | <field> ";" <fieldlist> | ε
 <field> ::= <identifier> ":" <type>
 <accessfield> ::= <identifier> "." <identifier>
 
 <identifier> ::= <letter> | <letter> <letter_digit_sequence>
-<letter_digit_sequence> ::= <letter> | <digit> | <letter_digit_sequence> <letter> | <letter_digit_sequence> <digit>
+<letter_digit_sequence> ::= <letter> | <digit> | <letter_digit_sequence> <letter> | <letter_digit_sequence> <digit> | ε
 <letter> ::= "a" | "b" | ... | "z"
 <digit> ::= "0" | "1" | ... | "9"
 
