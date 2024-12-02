@@ -6,7 +6,7 @@ Operators:
 +, *, :=, <, <=, =, <>, >=, >, AND, MOD.
 
 Separators:
-|, \t, \n, (, ), {, }, [, ], ,, ;, :.
+|, \t, \n, (, ), ,, ;, :.
 
 Identifiers:
 Represented as letter and digit.
