@@ -87,7 +87,7 @@ declaration -> identifier ":" <type>
 type -> "BOOL" | "INT"
 
 cmpdstmt -> "BEGIN" stmtlist "END"
-stmtlist -> stmt | stmt ";" stmtlist | ε
+stmtlist -> stmt | stmt ";" stmtlist | ε | structdecl
 stmt -> simplstmt | structstmt
 
 simplstmt -> assignstmt | iostmt
