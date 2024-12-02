@@ -61,6 +61,8 @@ stmtlist ::= stmt | stmt ";" stmtlist | ε
 stmt ::= simplstmt | structstmt
 
 simplstmt ::= assignstmt | iostmt
+
+// ASSIGNMENT 
 assignstmt ::= identifier ":=" expression
 iostmt ::= "READ" "(" <identifier> ")" | "WRITE" "(" expression ")"
 
@@ -68,22 +70,21 @@ expression ::= expression "+" term | term
 term ::= term "*" factor | factor
 factor ::= "(" expression ")" | identifier | intconst | boolconst | factor "MOD" factor
 
-<condition> ::= <expression> <relation> <expression> | <expression> "AND" <expression>
+<condition> ::= expression relation expression | expression "AND" expression
 <relation> ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
 
-<structstmt> ::= <ifstmt> | <whilestmt> | <cmpdstmt>
-<ifstmt> ::= "IF" <condition> "THEN" <stmt> | "IF" <condition> "THEN" <stmt> "ELSE" <stmt>
-<whilestmt> ::= "WHILE" <condition> "DO" <stmt>
+structstmt ::= ifstmt | whilestmt | cmpdstmt
+ifstmt ::= "IF" condition "THEN" stmt | "IF" condition "THEN" stmt "ELSE" stmt
+whilestmt ::= "WHILE" condition "DO" stmt
 
-<structdecl> ::= "STRUCT" <identifier> "{" <fieldlist> "}"
-<fieldlist> ::= <field> | <field> ";" <fieldlist> | ε
-<field> ::= <identifier> ":" <type>
-<accessfield> ::= <identifier> "." <identifier>
+structdecl ::= "STRUCT" identifier "{" fieldlist "}"
+fieldlist ::= field | field ";" fieldlist | ε
+field ::= identifier ":" type
+accessfield ::= identifier "." identifier
 
-<identifier> ::= <letter> | <letter> <letter_digit_sequence>
-<letter_digit_sequence> ::= <letter> | <digit> | <letter_digit_sequence> <letter> | <letter_digit_sequence> <digit> | ε
-<letter> ::= "a" | "b" | ... | "z"
-<digit> ::= "0" | "1" | ... | "9"
+identifier> ::= letter | letter letter_digit_sequence
+letter_digit_sequence ::= letter | digit | letter_digit_sequence letter | letter_digit_sequence digit | ε
+
 
 
 
