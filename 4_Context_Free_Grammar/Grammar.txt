@@ -52,8 +52,8 @@ Imposed conditions:
 - the rule is:
 
 // IDENTIFIER
-   identifier ::= letter | letter letter_digit_sequence
-   letter_digit_sequence ::= letter | digit | letter_digit_sequence letter | letter_digit_sequence digit | ε
+   identifier -> letter | letter letter_digit_sequence
+   letter_digit_sequence -> letter | digit | letter_digit_sequence letter | letter_digit_sequence digit | ε
 
 c) Constants
 Imposed conditions:
@@ -61,11 +61,11 @@ Imposed conditions:
 - it cannot be modified after a value is assigned to it
 
 // CONSTANTS - INT
-intconst ::= "+" int_nonzero | "-" int_nonzero | integer
-integer ::= '0' | integer_nonzero
-integer_nonzero ::= digit_nonzero integer_end
-integer_end ::= ε | digit integer_end
-digit_nonzero ::= '1' | '2' | ... | '9'
+intconst -> "+" int_nonzero | "-" int_nonzero | integer
+integer -> '0' | integer_nonzero
+integer_nonzero -> digit_nonzero integer_end
+integer_end -> ε | digit integer_end
+digit_nonzero -> '1' | '2' | ... | '9'
 
 
 
@@ -76,41 +76,45 @@ char -> letter | digit
 
 // BOOLEAN
 3. BOOL - (for values of the type "TRUE" or "FALSE") rule:
-    boolconst ::= "TRUE" | "FALSE" 
+    boolconst -> "TRUE" | "FALSE" 
 
 Productions (P)
 
 // PROGRAM
 program -> "VAR" declaration ";" cmpdstmt "."
 
-declaration ::= identifier ":" <type>
-type ::= "BOOL" | "INT"
+declaration -> identifier ":" <type>
+type -> "BOOL" | "INT"
 
-cmpdstmt ::= "BEGIN" stmtlist "END"
-stmtlist ::= stmt | stmt ";" stmtlist | ε
-stmt ::= simplstmt | structstmt
+cmpdstmt -> "BEGIN" stmtlist "END"
+stmtlist -> stmt | stmt ";" stmtlist | ε
+stmt -> simplstmt | structstmt
 
-simplstmt ::= assignstmt | iostmt
+simplstmt -> assignstmt | iostmt
 
 // ASSIGNMENT 
-assignstmt ::= identifier ":=" expression
-iostmt ::= "READ" "(" <identifier> ")" | "WRITE" "(" expression ")"
+assignstmt -> identifier ":=" expression
 
-expression ::= expression "+" term | term
-term ::= term "*" factor | factor
-factor ::= "(" expression ")" | identifier | intconst | boolconst | factor "MOD" factor
+// INPUT - OUTPUT
+iostmt -> "READ" "(" <identifier> ")" | "WRITE" "(" expression ")"
 
-condition ::= expression relation expression | expression "AND" expression
-relation ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
+expression -> expression "+" term | term
+term -> term "*" factor | factor
+factor -> "(" expression ")" | identifier | intconst | boolconst | factor "MOD" factor
 
-structstmt ::= ifstmt | whilestmt | cmpdstmt
-ifstmt ::= "IF" condition "THEN" stmt | "IF" condition "THEN" stmt "ELSE" stmt
-whilestmt ::= "WHILE" condition "DO" stmt
+condition -> expression relation expression | expression "AND" expression
+relation -> "<" | "<=" | "=" | "<>" | ">=" | ">"
 
-structdecl ::= "STRUCT" identifier "{" fieldlist "}"
-fieldlist ::= field | field ";" fieldlist | ε
-field ::= identifier ":" type
-accessfield ::= identifier "." identifier
+structstmt -> ifstmt | whilestmt | cmpdstmt
+
+// IF - WHILE
+ifstmt -> "IF" condition "THEN" stmt | "IF" condition "THEN" stmt "ELSE" stmt
+whilestmt -> "WHILE" condition "DO" stmt
+
+structdecl -> "STRUCT" identifier "{" fieldlist "}"
+fieldlist -> field | field ";" fieldlist | ε
+field -> identifier ":" type
+accessfield -> identifier "." identifier
 
 
 
