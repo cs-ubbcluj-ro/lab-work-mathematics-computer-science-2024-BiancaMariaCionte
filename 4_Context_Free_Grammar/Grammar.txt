@@ -24,8 +24,10 @@ Imposed conditions:
 - they cannot be reserved words such as: "INT", "IF","TRUE", "READ";
 - the rule is:
 
-    identifier ::= letter | digit
-    letter ::= "A" | "B" | . ..| "Z"
+    identifier ::= letter identifier_more
+    identifier_more ::= ε | identifier_element	
+    identifier_element ::= letter | digit
+    letter ::= "A" | "B" | . ..| "Z" | 'a' | 'b' | ... | 'z' 
     digit ::= "0" | "1" |...| "9"
 
 c) Constants
@@ -33,36 +35,38 @@ Imposed conditions:
 - it is defined using basic values of the type: INT, BOOL
 - it cannot be modified after a value is assigned to it
 
-1. INT - rule:
-	intconst := +no|-no|no
-	no := digit
+1. Constants
 
-2. string - rule:
-	
+intconst ::= "+" int_nonzero | "-" int_nonzero | integer
+integer ::= '0' | integer_nonzero
+integer_nonzero ::= digit_nonzero integer_end
+integer_end ::= ε | digit integer_end
+digit_nonzero ::= '1' | '2' | ... | '9'
 
-      constchar:="string"
-      string:=char
-      char:=letter|digit
+2. String :
+string ::= '"' string_content '"'
+string_content ::= eps | char string_content
+char ::= letter | digit
 
 3. BOOL - (for values of the type "TRUE" or "FALSE") rule:
     boolconst ::= "TRUE" | "FALSE" 
 
-<program> ::= "VAR" <declaration> ";" <cmpdstmt> "."
+program ::= "VAR" declaration ";" cmpdstmt "."
 
-<declaration> ::= <identifier> ":" <type>
-<type> ::= "BOOL" | "INT"
+declaration ::= identifier ":" <type>
+type ::= "BOOL" | "INT"
 
-<cmpdstmt> ::= "BEGIN" <stmtlist> "END"
-<stmtlist> ::= <stmt> | <stmt> ";" <stmtlist> | ε
-<stmt> ::= <simplstmt> | <structstmt>
+cmpdstmt ::= "BEGIN" stmtlist "END"
+stmtlist ::= stmt | stmt ";" stmtlist | ε
+stmt ::= simplstmt | structstmt
 
-<simplstmt> ::= <assignstmt> | <iostmt>
-<assignstmt> ::= <identifier> ":=" <expression>
-<iostmt> ::= "READ" "(" <identifier> ")" | "WRITE" "(" <expression> ")"
+simplstmt ::= assignstmt | iostmt
+assignstmt ::= identifier ":=" expression
+iostmt ::= "READ" "(" <identifier> ")" | "WRITE" "(" expression ")"
 
-<expression> ::= <expression> "+" <term> | <term>
-<term> ::= <term> "*" <factor> | <factor>
-<factor> ::= "(" <expression> ")" | <identifier> | <intconst> | <boolconst> | <factor> "MOD" <factor>
+expression ::= expression "+" term | term
+term ::= term "*" factor | factor
+factor ::= "(" expression ")" | identifier | intconst | boolconst | factor "MOD" factor
 
 <condition> ::= <expression> <relation> <expression> | <expression> "AND" <expression>
 <relation> ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
@@ -81,9 +85,9 @@ Imposed conditions:
 <letter> ::= "a" | "b" | ... | "z"
 <digit> ::= "0" | "1" | ... | "9"
 
-<intconst> ::= "+" <no> | "-" <no> | <no>
-<no> ::= <digit> | <digit> <no>
-<boolconst> ::= "TRUE" | "FALSE"
+
+
+boolconst ::= "TRUE" | "FALSE"
 
 <constchar> ::= "string"
 <string> ::= <char> | <char> <string>
