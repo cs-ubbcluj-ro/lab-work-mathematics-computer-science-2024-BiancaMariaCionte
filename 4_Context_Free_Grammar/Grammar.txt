@@ -24,7 +24,7 @@ Imposed conditions:
 - they cannot be reserved words such as: "INT", "IF","TRUE", "READ";
 - the rule is:
 
-    identifier ::= letter | letter{letter}{digit}
+    identifier ::= letter | digit
     letter ::= "A" | "B" | . ..| "Z"
     digit ::= "0" | "1" |...| "9"
 
@@ -35,13 +35,13 @@ Imposed conditions:
 
 1. INT - rule:
 	intconst := +no|-no|no
-	no := digit{no}
+	no := digit
 
 2. string - rule:
 	
 
       constchar:="string"
-      string:=char{string}
+      string:=char
       char:=letter|digit
 
 3. BOOL - (for values of the type "TRUE" or "FALSE") rule:
