@@ -306,3 +306,11 @@ int main(int argc, char **argv) {
     fclose(yyin);
     return 0;
 }
+
+
+// labul5.l
+// labul_ok_no_debug
+// lex labul5.l
+// yacc -d labul_ok_no_debug.y
+// cc lex.yy.c y.tab.c -o labul5 -lfl
+// cc lex.yy.c y.tab.c -o labul5 -lfl -DYYDEBUG=1
